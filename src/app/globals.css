@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+/* ————————————————————————————————
+   법률사무소 진원 — 디자인 토큰
+   Warm-dark canvas system (Warp-inspired)
+   ———————————————————————————————— */
+:root {
+  --canvas: #2b2622;
+  --canvas-deep: #211d1a;
+  --canvas-soft: #383330;
+  --hairline: #3f3a36;
+  --ink: #f7f5f0;
+  --body-strong: #dad2c1;
+  --body: #c9c0ad;
+  --mute: #aea69c;
+  --on-primary: #2b2622;
+  --amber: #d9b98a; /* 헤드라이트/경광 등 장면 연출 전용 웜 글로우 — UI 크롬에는 쓰지 않음 */
+  --stack-sans: var(--font-pretendard), "Pretendard Variable", Pretendard,
+    -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --stack-serif: var(--font-serif-kr), "Noto Serif KR", "Nanum Myeongjo", serif;
+  --stack-mono: var(--font-dm-mono), "DM Mono", ui-monospace, "SF Mono",
+    monospace;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-canvas-soft: var(--canvas-soft);
+  --color-hairline: var(--hairline);
+  --color-ink: var(--ink);
+  --color-body-strong: var(--body-strong);
+  --color-body: var(--body);
+  --color-mute: var(--mute);
+  --color-amber: var(--amber);
+  --color-on-primary: var(--on-primary);
+  --font-sans: var(--stack-sans);
+  --font-serif: var(--stack-serif);
+  --font-mono: var(--stack-mono);
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--stack-sans);
+  font-feature-settings: "tnum" 1;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  word-break: keep-all; /* 한국어 단어 중간 줄바꿈 방지 */
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--on-primary);
+}
+
+/* ————— 접근성 · 인터랙션 기본기 ————— */
+
+/* 키보드 포커스 링 */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Tailwind v4 preflight는 버튼 커서가 default — 클릭 가능 요소는 포인터로 */
+button:not(:disabled),
+[role="button"],
+summary,
+label[for] {
+  cursor: pointer;
+}
+
+/* 모바일 더블탭 지연 제거 */
+a,
+button,
+[role="button"],
+input,
+textarea,
+select {
+  touch-action: manipulation;
+}
+
+/* 앵커 타겟이 고정 헤더에 가리지 않도록 */
+[id] {
+  scroll-margin-top: 96px;
+}
+
+/* 버튼 프레스 피드백 */
+.press {
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+.press:active {
+  transform: scale(0.98);
+}
+
+/* 스킵 링크 — 포커스 시에만 나타남 */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 200;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: var(--on-primary);
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: top 0.2s ease;
+}
+.skip-link:focus-visible {
+  top: 16px;
+}
+
+/* 모바일 하단 상담 바가 콘텐츠 끝을 가리지 않도록 */
+@media (max-width: 1023.5px) {
+  footer {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* 커스텀 스크롤바 — 웜다크 톤 유지 */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--canvas-soft) var(--canvas-deep);
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--canvas-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--canvas-soft);
+  border-radius: 5px;
+  border: 2px solid var(--canvas-deep);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hairline);
+}
+
+/* 필름 그레인 — 페이지 전체에 아주 옅게 */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* 디스플레이 타입 — 가벼운 웨이트 + 네거티브 트래킹이 브랜드 보이스 */
+.display {
+  font-weight: 400;
+  letter-spacing: -0.032em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.serif-accent {
+  font-family: var(--stack-serif);
+  font-weight: 600;
+}
+
+.eyebrow {
+  font-family: var(--stack-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* 헤어라인 디바이더 */
+.hairline-t { border-top: 1px solid var(--hairline); }
+.hairline-b { border-bottom: 1px solid var(--hairline); }
+
+/* 언더라인 링크 */
+.link-quiet {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.link-quiet::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-quiet:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* 마퀴 (승소사례 티커) — 스크롤과 무관한 자동 흐름, 호버 시 정지 */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 42s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ————— 포트레이트 아트디렉션 —————
+   사진은 항상 원본 컬러로 보여준다. 배경 통일은 웜 틴트를
+   아주 옅게 얹는 정도로만 하고, 채도를 죽이지 않는다. */
+.portrait-img {
+  filter: contrast(1.03) saturate(1.04);
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .portrait-img,
+.portrait-live .portrait-img {
+  filter: contrast(1.05) saturate(1.08);
+}
+.portrait-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(217, 185, 138, 0.05) 0%,
+    rgba(43, 38, 34, 0.04) 55%,
+    rgba(33, 29, 26, 0.16) 100%
+  );
+}
+.portrait-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    75% 55% at 50% 28%,
+    rgba(217, 185, 138, 0.08),
+    transparent 72%
+  );
+  mix-blend-mode: soft-light;
+}
+
+/* 필름 프레임 코너 틱 */
+.frame-ticks i {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(247, 245, 240, 0.28);
+  border-style: solid;
+  border-width: 0;
+}
+.frame-ticks i:nth-child(1) { top: 10px; left: 10px; border-top-width: 1px; border-left-width: 1px; }
+.frame-ticks i:nth-child(2) { top: 10px; right: 10px; border-top-width: 1px; border-right-width: 1px; }
+.frame-ticks i:nth-child(3) { bottom: 10px; left: 10px; border-bottom-width: 1px; border-left-width: 1px; }
+.frame-ticks i:nth-child(4) { bottom: 10px; right: 10px; border-bottom-width: 1px; border-right-width: 1px; }
+
