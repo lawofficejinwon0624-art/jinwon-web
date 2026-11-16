@@ -12,6 +12,8 @@ export type Member = {
   fields: string[];
   /** 실물 사진 경로 — 없으면 모노그램 폴백으로 렌더링 */
   photo?: string;
+  /** 밝은 사진 배경에서는 번호와 상단 라벨을 어둡게 표시 */
+  photoLabelTone?: "dark";
   initial: string;
 };
 
@@ -115,7 +117,7 @@ export const members: Member[] = [
     slug: "jung-jooyoung",
     name: "정주영",
     role: "대표 손해사정사",
-    focus: "대인보상 · 신체손해사정",
+    focus: "교통사고 손해사정 전문",
     tagline: "보험사 보상팀 출신이 의뢰인 편에 섭니다.",
     quote:
       "보험사 대인보상팀에서 실무를 시작했습니다. 그쪽의 계산법을 알기에, 이제 반대편에서 의뢰인의 몫을 지킵니다.",
@@ -139,6 +141,29 @@ export const members: Member[] = [
     fields: ["대인보상", "신체손해사정", "보험금청구", "손해액 산정"],
     photo: "/images/members/jung-jooyoung.webp",
     initial: "정",
+  },
+  {
+    slug: "lee-youngchan",
+    name: "이영찬",
+    role: "손해사정사",
+    focus: "신체손해사정 · 후유장해",
+    tagline: "",
+    quote: "신체 손해와 후유장해, 기록 속 작은 차이까지 세심하게 살핍니다.",
+    intro: [
+      "한길 화재특종자동차손해사정(주)에서 근무했으며, 한길 인손해사정사무소 운영과 중용종합손해사정(주) 대표 경력을 갖추고 있습니다.",
+      "한길 노동법률사무소 산재팀장을 역임했으며, 현재 법률사무소 진원에서 신체손해사정과 후유장해 분야를 담당합니다.",
+    ],
+    career: [
+      "前 한길 화재특종자동차손해사정(주)",
+      "前 한길 노동법률사무소 산재팀장",
+      "前 한길 인손해사정사무소 운영",
+      "前 중용종합손해사정(주) 대표",
+    ],
+    credentials: [],
+    fields: ["신체손해사정", "후유장해"],
+    photo: "/images/members/lee-youngchan.jpg",
+    photoLabelTone: "dark",
+    initial: "이",
   },
   {
     slug: "hong-seonghun",

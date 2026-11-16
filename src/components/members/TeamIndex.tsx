@@ -141,10 +141,10 @@ export default function TeamIndex() {
 
             {/* 상단 라벨 */}
             <div className="absolute inset-x-0 top-0 flex items-center justify-between px-6 pt-5">
-              <p className="font-mono text-[10px] tracking-[0.24em] text-body-strong">
+              <p className={`font-mono text-[10px] tracking-[0.24em] ${m.photoLabelTone === "dark" ? "text-canvas" : "text-body-strong"}`}>
                 PROFILE — {String(active + 1).padStart(2, "0")}
               </p>
-              <p className="font-mono text-[10px] tracking-[0.14em] text-mute">
+              <p className={`font-mono text-[10px] tracking-[0.14em] ${m.photoLabelTone === "dark" ? "text-canvas" : "text-mute"}`}>
                 {String(active + 1).padStart(2, "0")} /{" "}
                 {String(members.length).padStart(2, "0")}
               </p>
@@ -163,7 +163,7 @@ export default function TeamIndex() {
 
           {/* 활성 구성원 인용구 */}
           <div className="relative mt-6 min-h-[92px]">
-            {members.map((member, i) => (
+            {members.map((member, i) => member.quote ? (
               <blockquote
                 key={member.slug}
                 aria-hidden={active !== i}
@@ -175,7 +175,7 @@ export default function TeamIndex() {
               >
                 “{member.quote}”
               </blockquote>
-            ))}
+            ) : null)}
           </div>
 
           {/* 활성 구성원 전문분야 */}
@@ -230,7 +230,7 @@ export default function TeamIndex() {
                 aria-hidden
                 className="absolute inset-0 bg-gradient-to-t from-canvas/75 via-transparent to-transparent"
               />
-              <p className="absolute left-4 top-4 font-mono text-[10px] tracking-[0.2em] text-body-strong">
+              <p className={`absolute left-4 top-4 font-mono text-[10px] tracking-[0.2em] ${member.photoLabelTone === "dark" ? "text-canvas" : "text-body-strong"}`}>
                 {String(i + 1).padStart(2, "0")}
               </p>
             </div>
