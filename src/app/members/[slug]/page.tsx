@@ -18,7 +18,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const m = getMember(slug);
   if (!m) return {};
-  const description = `${m.name} ${m.role} — ${m.focus}. ${m.tagline}`;
+  const description = [
+    `${m.name} ${m.role} — ${m.focus}.`,
+    m.tagline,
+  ].filter(Boolean).join(" ");
   return {
     title: `${m.name} ${m.role}`,
     description,
@@ -69,23 +72,27 @@ export default async function MemberPage({
                   {m.focus}
                 </p>
               </div>
-              <div>
-                <blockquote className="serif-accent mt-12 max-w-[30ch] border-l border-hairline pl-6 text-[20px] leading-[1.7] text-body-strong md:text-[23px]">
-                  “{m.quote}”
-                </blockquote>
-              </div>
-              <div>
-                <div className="mt-12 space-y-6">
-                  {m.intro.map((para) => (
-                    <p
-                      key={para.slice(0, 12)}
-                      className="max-w-[58ch] text-[15.5px] leading-[1.9] text-body"
-                    >
-                      {para}
-                    </p>
-                  ))}
+              {m.quote && (
+                <div>
+                  <blockquote className="serif-accent mt-12 max-w-[30ch] border-l border-hairline pl-6 text-[20px] leading-[1.7] text-body-strong md:text-[23px]">
+                    “{m.quote}”
+                  </blockquote>
                 </div>
-              </div>
+              )}
+              {m.intro.length > 0 && (
+                <div>
+                  <div className="mt-12 space-y-6">
+                    {m.intro.map((para) => (
+                      <p
+                        key={para.slice(0, 12)}
+                        className="max-w-[58ch] text-[15.5px] leading-[1.9] text-body"
+                      >
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* 사이드 카드 */}
@@ -118,26 +125,30 @@ export default async function MemberPage({
                     </p>
                   </div>
                 </div>
-                <div className="bg-canvas-soft/50 p-6">
-                  <p className="eyebrow mb-4">주요 경력</p>
-                  <ul className="space-y-2.5">
-                    {m.career.map((c) => (
-                      <li key={c} className="text-[13.5px] leading-relaxed text-body-strong">
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-canvas-soft/50 p-6">
-                  <p className="eyebrow mb-4">자격 · 이력</p>
-                  <ul className="space-y-2.5">
-                    {m.credentials.map((c) => (
-                      <li key={c} className="text-[13.5px] leading-relaxed text-body-strong">
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {m.career.length > 0 && (
+                  <div className="bg-canvas-soft/50 p-6">
+                    <p className="eyebrow mb-4">주요 경력</p>
+                    <ul className="space-y-2.5">
+                      {m.career.map((c) => (
+                        <li key={c} className="text-[13.5px] leading-relaxed text-body-strong">
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {m.credentials.length > 0 && (
+                  <div className="bg-canvas-soft/50 p-6">
+                    <p className="eyebrow mb-4">자격 · 이력</p>
+                    <ul className="space-y-2.5">
+                      {m.credentials.map((c) => (
+                        <li key={c} className="text-[13.5px] leading-relaxed text-body-strong">
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <div className="bg-canvas-soft/50 p-6">
                   <p className="eyebrow mb-4">전문분야</p>
                   <div className="flex flex-wrap gap-2">
