@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
 import { members } from "@/data/members";
 import { getColumnSitemap } from "@/lib/columns";
+import { questionTopics, questionVerifiedAt } from "@/data/questions";
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -27,6 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${site.url}/members/${m.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    ...["/ai", ...questionTopics.map((topic) => "/ai/" + topic.slug)].map((path) => ({
+      url: `${site.url}${path}`,
+      lastModified: questionVerifiedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
     })),
     ...columns.map((column) => ({
       url: `${site.url}/columns/${encodeURIComponent(column.slug)}`,

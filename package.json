@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
-    "start": "next start"
+    "start": "next start",
+    "test:questions": "node --test tests/questions.test.mjs",
+    "check:questions": "node scripts/check-public-questions.mjs"
   },
   "dependencies": {
     "next": "^16.4.6",

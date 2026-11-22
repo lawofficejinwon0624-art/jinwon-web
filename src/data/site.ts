@@ -38,5 +38,6 @@ export const navLinks = [
   { href: "/practice", label: "업무분야" },
   { href: "/legal", label: "법률가이드" },
   { href: "/columns", label: "진원 칼럼" },
+  { href: "/ai", label: "AI 진원" },
   { href: "/location", label: "찾아오시는 길" },
 ] as const;

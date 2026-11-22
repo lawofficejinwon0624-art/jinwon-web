@@ -8,6 +8,7 @@ const MENU = [
   { href: "/activities", label: "성공사례" },
   { href: "/legal", label: "법률가이드" },
   { href: "/columns", label: "진원 칼럼" },
+  { href: "/ai", label: "AI 진원 · 공개 문답" },
 ];
 
 const SUPPORT = [

@@ -58,7 +58,7 @@ export default function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="주 메뉴" className="hidden items-center xl:flex">
             {navLinks.map((l) => {
               const active =
                 l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
@@ -67,7 +67,7 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   aria-current={active ? "page" : undefined}
-                  className={`rounded-sm px-3.5 py-2.5 text-[14px] font-medium transition-colors duration-200 ${
+                  className={`rounded-sm px-2.5 py-2.5 text-[14px] font-medium transition-colors duration-200 ${
                     active ? "text-ink" : "text-body hover:text-ink"
                   }`}
                 >
@@ -83,7 +83,7 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-2 xl:hidden">
             <a
               href={`tel:${site.phone}`}
               data-phone-position="mobile-header"
@@ -114,22 +114,25 @@ export default function Header() {
 
       {/* 모바일 전체화면 메뉴 */}
       <div
-        className={`fixed inset-0 z-40 bg-canvas transition-opacity duration-400 lg:hidden ${
+        aria-hidden={!open}
+        inert={!open}
+        className={`fixed inset-0 z-40 bg-canvas transition-opacity duration-400 xl:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <nav className="flex h-full flex-col justify-center px-8 pt-16">
+        <nav aria-label="모바일 메뉴" className="flex h-full flex-col overflow-y-auto px-8 pb-10 pt-24">
           {[...navLinks, { href: "/consult", label: "빠른 상담신청" }].map(
             (l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`hairline-b flex items-center justify-between py-5 transition-[opacity,transform] duration-500 ${
+                onClick={() => setOpen(false)}
+                className={`hairline-b flex shrink-0 items-center justify-between py-3.5 transition-[opacity,transform] duration-500 ${
                   open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                 }`}
                 style={{ transitionDelay: open ? `${80 + i * 60}ms` : "0ms" }}
               >
-                <span className="display text-[26px]">{l.label}</span>
+                <span className="display text-[24px]">{l.label}</span>
                 <span className="font-mono text-[11px] text-mute">
                   0{i + 1}
                 </span>

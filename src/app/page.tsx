@@ -192,7 +192,7 @@ export default function Home() {
       <section className="hairline-t bg-canvas">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-5 py-20 md:flex-row md:items-end md:justify-between md:px-8 md:py-28">
           <div><p className="eyebrow mb-6">JINWON JOURNAL</p><h2 className="text-[clamp(28px,3.5vw,42px)] leading-[1.5] tracking-[-0.045em]">당신의 질문에서,<br/><span className="serif-accent">진원의 이야기</span>가 시작됩니다.</h2></div>
-          <div><p className="mb-7 text-[14px] leading-[1.9] text-body">교통사고, 산재사고, 질병·진단금.<br/>꼭 필요한 법률 이야기를 차분히 전합니다.</p><Link href="/columns" className="inline-flex gap-12 border-b border-mute pb-3 text-[14px]">진원 칼럼 읽어보기 <span>↗</span></Link></div>
+          <div><p className="mb-7 text-[14px] leading-[1.9] text-body">교통사고, 산재사고, 질병·진단금.<br/>꼭 필요한 법률 이야기를 차분히 전합니다.</p><div className="flex flex-col items-start gap-5"><Link href="/columns" className="inline-flex gap-12 border-b border-mute pb-3 text-[14px]">진원 칼럼 읽어보기 <span>↗</span></Link><Link href="/ai" className="inline-flex gap-8 text-[13px] text-body">AI 진원에서 공개 문답 찾기 <span>↗</span></Link></div></div>
         </div>
       </section>
 
