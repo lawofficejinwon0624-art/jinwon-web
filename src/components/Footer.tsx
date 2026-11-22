@@ -7,6 +7,7 @@ const MENU = [
   { href: "/practice", label: "업무분야" },
   { href: "/activities", label: "성공사례" },
   { href: "/legal", label: "법률가이드" },
+  { href: "/columns", label: "진원 칼럼" },
 ];
 
 const SUPPORT = [

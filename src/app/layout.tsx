@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Noto_Serif_KR, DM_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./columns.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuickContactDock from "@/components/QuickContactDock";
