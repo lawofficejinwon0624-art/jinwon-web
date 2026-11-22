@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingIncludes: {
+    '/columns/*/card.png': ['./assets/*.ttf', './assets/*.png', './public/images/columns/*'],
+  },
 };
 
 export default nextConfig;
