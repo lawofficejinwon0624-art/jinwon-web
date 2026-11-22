@@ -20,6 +20,8 @@ export type ChapterProps = {
   href: string;
   /** 이미지 경로. 주어지면 캔버스 대신 이 이미지를 쓴다 (4:5) */
   image?: string;
+  /** 배경이 있는 정물 이미지를 챕터 배경으로 부드럽게 연결한다. */
+  imageFade?: boolean;
 };
 
 /**
@@ -34,6 +36,7 @@ export default function Chapter({
   result,
   href,
   image,
+  imageFade = false,
 }: ChapterProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -111,7 +114,13 @@ export default function Chapter({
                   src={image}
                   alt=""
                   aria-hidden
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-contain"
+                  style={imageFade ? {
+                    maskImage: "radial-gradient(ellipse 70% 65% at 50% 52%, black 50%, transparent 100%)",
+                    WebkitMaskImage: "radial-gradient(ellipse 70% 65% at 50% 52%, black 50%, transparent 100%)",
+                  } : undefined}
                 />
               </>
             ) : (

@@ -19,7 +19,7 @@ export default function Home() {
         eyebrow="WHY JINWON"
         lead="같은 사건도, 초기 대응에 따라 결과는 달라집니다. 초기 대응의 작은 차이가 수사의 방향을 바꿉니다."
         punch="그래서 진원은 사건의 현장에 있습니다."
-        tail="진원이 두 가지 사건을 다루는 방식을 직접 확인하세요."
+        tail="진원이 세 가지 사건을 다루는 방식을 직접 확인하세요."
       />
 
       {/* ——— 사건 챕터 ——— */}
@@ -51,8 +51,38 @@ export default function Home() {
       />
 
       <Chapter
-        scene="insurance"
+        image="/images/industrial-scene.webp"
+        imageFade
         index="02"
+        label="산재사고 · 근재보험"
+        href="/practice#industrial"
+        beats={[
+          {
+            eyebrow: "01 / 멈춰 선 일상",
+            title: "일터에서의 사고, 일상까지 멈춰 섭니다.",
+            body: "치료와 휴업, 앞으로의 생계까지. 사고 이후의 막막함을 함께 살핍니다.",
+          },
+          {
+            eyebrow: "02 / 산재 승인 그 이후",
+            title: "산재 승인, 보상은 충분한가요?",
+            body: "산재급여와 실제 손해의 차이, 후유장해와 위자료까지 검토가 필요합니다.",
+          },
+          {
+            eyebrow: "03 / 진원의 대응",
+            title: "재해 경위부터, 보상의 범위까지 짚습니다.",
+            body: "현장 자료와 의무기록으로 재해 경위를 확인합니다. 사업주 책임과 근재보험 가입 여부·약관을 살펴 추가 청구 가능성을 검토합니다.",
+          },
+        ]}
+        result={{
+          value: "산재 · 근재",
+          caption: "산재 신청부터 추가 손해 검토까지",
+          note: "산재 · 근재 대응 자세히 보기",
+        }}
+      />
+
+      <Chapter
+        scene="insurance"
+        index="03"
         label="보험분쟁 · 손해사정"
         href="/practice#insurance"
         beats={[
