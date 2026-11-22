@@ -43,6 +43,7 @@ export default function QuickContactDock() {
           </div>
           <a
             href={`tel:${site.phone}`}
+            data-phone-position="desktop-floating"
             className="group flex flex-col items-center gap-1.5 px-2 py-3.5 text-body-strong transition-colors hover:bg-canvas-soft hover:text-ink"
           >
             {PhoneIcon}
@@ -76,6 +77,7 @@ export default function QuickContactDock() {
           <div className="grid grid-cols-3">
             <a
               href={`tel:${site.phone}`}
+              data-phone-position="mobile-bottom"
               className="flex min-h-[58px] flex-col items-center justify-center gap-1 text-body-strong active:bg-canvas-soft"
             >
               {PhoneIcon}

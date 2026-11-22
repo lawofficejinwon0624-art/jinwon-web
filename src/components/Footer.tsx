@@ -80,6 +80,7 @@ export default function Footer() {
             <p className="eyebrow mb-5">Contact</p>
             <a
               href={`tel:${site.phone}`}
+              data-phone-position="footer"
               className="font-mono text-[26px] text-ink transition-opacity hover:opacity-80"
             >
               {site.phone}

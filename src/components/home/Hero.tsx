@@ -89,6 +89,7 @@ export default function Hero() {
           </Link>
           <a
             href={`tel:${site.phone}`}
+            data-phone-position="hero"
             className="block rounded-sm border border-hairline px-6 py-4 font-mono text-[14px] text-ink transition-colors hover:border-mute"
           >
             {site.phone}

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Noto_Serif_KR, DM_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -208,6 +209,11 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <Footer />
         <QuickContactDock />
+        <Script
+          src="/jinwon-phone-tracker.js"
+          strategy="afterInteractive"
+          data-endpoint="https://jinwon-marketing-hq.vercel.app/api/collect"
+        />
       </body>
     </html>
   );

@@ -180,6 +180,7 @@ export default function Home() {
               </Link>
               <a
                 href={`tel:${site.phone}`}
+                data-phone-position="bottom-cta"
                 className="rounded-sm border border-hairline px-8 py-4 font-mono text-[15px] text-ink transition-colors hover:border-mute"
               >
                 {site.phone} <span className="ml-2 text-[12px] text-mute">24시간 · 연중무휴</span>

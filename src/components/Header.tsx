@@ -86,6 +86,7 @@ export default function Header() {
           <div className="flex items-center gap-2 lg:hidden">
             <a
               href={`tel:${site.phone}`}
+              data-phone-position="mobile-header"
               className="rounded-sm bg-ink px-3.5 py-2 font-mono text-[13px] font-medium text-on-primary"
             >
               {site.phone}
@@ -140,7 +141,7 @@ export default function Header() {
             style={{ transitionDelay: open ? "480ms" : "0ms" }}
           >
             <p className="eyebrow mb-2">24시간 상담</p>
-            <a href={`tel:${site.phone}`} className="font-mono text-[32px] text-ink">
+            <a href={`tel:${site.phone}`} data-phone-position="navigation-menu" className="font-mono text-[32px] text-ink">
               {site.phone}
             </a>
           </div>
