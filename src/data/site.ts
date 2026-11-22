@@ -7,8 +7,8 @@ export const site = {
   phone: "1551-4308",
   phoneNote: "24시간 · 연중무휴",
   fax: "02-512-4329",
-  /** 푸터 사업자정보 표기용 대표번호 (상담 대표번호 1551-4308과 별개) */
-  mainTel: "02-512-4328",
+  /** 홈페이지 전체에서 사용하는 대표번호 */
+  mainTel: "1551-4308",
   email: "djbfgood@gmail.com",
   address: "서울특별시 강남구 영동대로 607, 랜드마크빌딩 6층",
   postcode: "06087",
