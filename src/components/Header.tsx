@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { PhoneIcon } from "@/components/ContactIcons";
 import { navLinks, site } from "@/data/site";
 
 export default function Header() {
@@ -39,17 +40,17 @@ export default function Header() {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 md:h-[72px] md:px-8">
-          <Link href="/" className="group flex items-center gap-3">
+          <Link href="/" className="group flex items-center gap-2 sm:gap-3">
             <Image
               src="/images/logo-emblem.webp"
               alt=""
               width={36}
               height={36}
               priority
-              className="h-8 w-8 shrink-0 object-contain md:h-9 md:w-9"
+              className="h-7 w-7 shrink-0 object-contain sm:h-8 sm:w-8 md:h-9 md:w-9"
             />
             <span className="flex items-baseline gap-2.5">
-              <span className="serif-accent text-[19px] leading-none tracking-[-0.01em] md:text-[21px]">
+              <span className="serif-accent whitespace-nowrap text-[17px] leading-none tracking-[-0.01em] sm:text-[19px] md:text-[21px]">
                 법률사무소 진원
               </span>
               <span className="hidden font-mono text-[10px] tracking-[0.2em] text-mute sm:inline">
@@ -87,9 +88,11 @@ export default function Header() {
             <a
               href={`tel:${site.phone}`}
               data-phone-position="mobile-header"
-              className="rounded-sm bg-ink px-3.5 py-2 font-mono text-[13px] font-medium text-on-primary"
+              aria-label={`24시간 전화상담 ${site.phone}`}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-contact-ivory font-mono text-[13px] font-medium text-on-primary sm:h-auto sm:w-auto sm:px-3.5 sm:py-2"
             >
-              {site.phone}
+              <PhoneIcon className="h-[18px] w-[18px] sm:hidden" />
+              <span className="hidden sm:inline">{site.phone}</span>
             </a>
             <button
               aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
@@ -116,7 +119,7 @@ export default function Header() {
       <div
         aria-hidden={!open}
         inert={!open}
-        className={`fixed inset-0 z-40 bg-canvas transition-opacity duration-400 xl:hidden ${
+        className={`fixed inset-0 z-[45] bg-canvas transition-opacity duration-400 xl:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >

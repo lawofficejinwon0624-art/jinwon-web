@@ -1,24 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { ClockIcon, KakaoIcon, PhoneIcon } from "@/components/ContactIcons";
 import { site } from "@/data/site";
-import { rolling24hCount } from "@/data/consultations";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [count, setCount] = useState<number | null>(null);
 
   // 모션 감소 선호 시 배경 영상 정지(포스터 프레임 유지)
   useEffect(() => {
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     videoRef.current?.pause();
-  }, []);
-
-  useEffect(() => {
-    setCount(rolling24hCount(new Date()));
-    const id = setInterval(() => setCount(rolling24hCount(new Date())), 60_000);
-    return () => clearInterval(id);
   }, []);
 
   return (
@@ -57,12 +50,12 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 flex-col justify-center px-5 pb-24 pt-28 md:px-8 md:pt-32">
-        {/* 라이브 배지 */}
+        {/* 첫 화면에서 상담 접수 시간을 바로 확인할 수 있도록 */}
         <div>
-          <div className="inline-flex items-center gap-2.5 border-b border-white/15 pb-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-ink" />
-            <span className="font-mono text-[12px] text-body-strong">
-              {count === null ? "실시간 상담 접수 중" : `최근 24시간 상담 ${count}건 접수 · 진행 중`}
+          <div className="inline-flex items-center gap-2 border-b border-contact-accent/35 pb-2.5 text-contact-accent">
+            <ClockIcon className="h-4 w-4 shrink-0" />
+            <span className="text-[12px] font-medium sm:text-[13px]">
+              24시간 상담 접수 · 연중무휴
             </span>
           </div>
         </div>
@@ -80,30 +73,38 @@ export default function Hero() {
           진행합니다.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link
-            href="/consult"
-            className="block rounded-sm bg-ink px-7 py-4 text-[14px] font-medium text-on-primary transition-opacity hover:opacity-85"
-          >
-            빠른 상담신청
-          </Link>
-          <a
-            href={`tel:${site.phone}`}
-            data-phone-position="hero"
-            className="block rounded-sm border border-hairline px-6 py-4 font-mono text-[14px] text-ink transition-colors hover:border-mute"
-          >
-            {site.phone}
-            <span className="ml-2 text-[12px] text-mute">24시간</span>
-          </a>
-          <a
-            href={site.kakaoChatUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block rounded-sm border border-hairline px-6 py-4 text-[14px] font-medium text-ink transition-colors hover:border-mute"
-          >
-            카카오톡 상담
-            <span aria-hidden className="ml-1.5 text-[12px] text-mute">↗</span>
-          </a>
+        <div className="mt-8 w-full max-w-[540px]">
+          <div className="grid grid-cols-2 gap-3">
+            <a
+              href={`tel:${site.phone}`}
+              data-phone-position="hero"
+              className="flex min-h-[114px] min-w-0 flex-col items-start justify-center gap-3 rounded-md bg-contact-ivory px-3.5 py-4 text-on-primary shadow-[0_6px_24px_rgba(0,0,0,0.12)] transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(0,0,0,0.24)] active:translate-y-0 motion-reduce:transform-none motion-reduce:transition-none sm:min-h-[96px] sm:flex-row sm:items-center sm:justify-start sm:gap-4 sm:px-6"
+            >
+              <PhoneIcon className="h-[22px] w-[22px] shrink-0 sm:h-6 sm:w-6" />
+              <span>
+                <span className="block text-[13px] font-semibold sm:text-[16px]">24시간 전화상담</span>
+                <span className="mt-1 block font-mono text-[15px] tracking-[0.02em] text-on-primary/80 sm:text-[17px]">{site.phone}</span>
+              </span>
+            </a>
+            <a
+              href={site.kakaoChatUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-[114px] min-w-0 flex-col items-start justify-center gap-3 rounded-md bg-contact-gold px-3.5 py-4 text-on-primary shadow-[0_6px_24px_rgba(0,0,0,0.12)] transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(0,0,0,0.24)] active:translate-y-0 motion-reduce:transform-none motion-reduce:transition-none sm:min-h-[96px] sm:flex-row sm:items-center sm:justify-start sm:gap-4 sm:px-6"
+            >
+              <KakaoIcon className="h-[22px] w-[22px] shrink-0 sm:h-6 sm:w-6" />
+              <span>
+                <span className="block text-[13px] font-semibold sm:text-[16px]">카카오톡 상담</span>
+                <span className="mt-1 block text-[11px] leading-relaxed text-on-primary/80 sm:text-[12px]">편하게 내용 남기기</span>
+              </span>
+            </a>
+          </div>
+          <div className="mt-2 flex items-center justify-between gap-3">
+            <p className="hidden text-[11px] text-mute sm:block">전화가 어렵다면 카카오톡으로 남겨주세요.</p>
+            <Link href="/consult" className="inline-flex min-h-11 items-center gap-2 text-[12px] text-body transition-colors hover:text-ink">
+              상담신청서 작성 <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
         </div>
 
         {/* 핵심 수치 스트립 */}

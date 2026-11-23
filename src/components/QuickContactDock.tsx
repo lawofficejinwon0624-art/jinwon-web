@@ -1,106 +1,87 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { AiIcon, ClockIcon, FormIcon, KakaoIcon, PhoneIcon } from "@/components/ContactIcons";
 import { site } from "@/data/site";
 
-/**
- * 상시 상담 동선 — 전화·카톡 유입이 주력이므로 어느 페이지·어느 스크롤 위치에서도
- * 한 번의 탭으로 연결되게 한다.
- * PC: 우측 세로 플로팅 독 / 모바일: 하단 고정 바. 공통 라벨 "24시간 상담 가능".
- */
-
-const PhoneIcon = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-[18px] w-[18px]" aria-hidden>
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const KakaoIcon = (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]" aria-hidden>
-    <path d="M12 3C6.48 3 2 6.54 2 10.9c0 2.8 1.86 5.26 4.66 6.65l-.95 3.53c-.08.31.27.56.54.38l4.21-2.79c.5.06 1.02.1 1.54.1 5.52 0 10-3.55 10-7.87S17.52 3 12 3z" />
-  </svg>
-);
-
-const FormIcon = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-[18px] w-[18px]" aria-hidden>
-    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
+/** 모든 페이지에서 전화·카카오톡 상담과 모바일 AI 진원에 바로 연결한다. */
 export default function QuickContactDock() {
+  const pathname = usePathname();
+  const aiActive = pathname === "/ai" || pathname.startsWith("/ai/");
+
   return (
     <>
-      {/* ——— PC: 우측 플로팅 독 ——— */}
-      <div className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-        <div className="w-[76px] overflow-hidden rounded-md border border-hairline bg-canvas/90 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md">
-          <div className="hairline-b flex flex-col items-center gap-1.5 px-2 py-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber" />
-            <p className="text-center font-mono text-[9px] leading-[1.5] tracking-[0.12em] text-body-strong">
-              24시간
-              <br />
-              상담가능
+      {/* PC: 기존 우측 상담 위치에서 전화와 카카오톡을 강조 */}
+      <aside aria-label="빠른 상담" className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+        <div className="w-[80px] overflow-hidden rounded-md border border-hairline bg-canvas/95 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md">
+          <div className="flex flex-col items-center gap-1.5 px-2 py-3 text-contact-accent">
+            <ClockIcon className="h-4 w-4" />
+            <p className="text-center text-[11px] leading-[1.5]">
+              24시간<br />상담 접수
             </p>
           </div>
           <a
             href={`tel:${site.phone}`}
             data-phone-position="desktop-floating"
-            className="group flex flex-col items-center gap-1.5 px-2 py-3.5 text-body-strong transition-colors hover:bg-canvas-soft hover:text-ink"
+            aria-label={`24시간 전화상담 ${site.phone}`}
+            className="flex min-h-[68px] flex-col items-center justify-center gap-1.5 bg-contact-ivory px-2 py-3 text-on-primary transition-colors hover:bg-ink"
           >
-            {PhoneIcon}
-            <span className="text-[10.5px] font-medium">전화상담</span>
+            <PhoneIcon />
+            <span className="text-[11px] font-semibold">전화상담</span>
           </a>
           <a
             href={site.kakaoChatUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hairline-t flex flex-col items-center gap-1.5 px-2 py-3.5 text-body-strong transition-colors hover:bg-canvas-soft hover:text-ink"
+            className="flex min-h-[68px] flex-col items-center justify-center gap-1.5 bg-contact-gold px-2 py-3 text-on-primary transition-colors hover:bg-contact-ivory"
           >
-            {KakaoIcon}
-            <span className="text-[10.5px] font-medium">카톡상담</span>
+            <KakaoIcon />
+            <span className="text-[11px] font-semibold">카카오톡</span>
           </a>
-          <Link
-            href="/consult"
-            className="hairline-t flex flex-col items-center gap-1.5 bg-ink px-2 py-3.5 text-on-primary transition-opacity hover:opacity-90"
-          >
-            {FormIcon}
-            <span className="text-[10.5px] font-medium">상담신청</span>
+          <Link href="/consult" className="flex min-h-[60px] flex-col items-center justify-center gap-1.5 px-2 py-3 text-body-strong transition-colors hover:bg-canvas-soft hover:text-ink">
+            <FormIcon className="h-[18px] w-[18px]" />
+            <span className="text-[11px] font-medium">상담신청</span>
           </Link>
         </div>
-        <p className="mt-2 text-center font-mono text-[10px] tracking-[0.04em] text-mute">
-          {site.phone}
-        </p>
-      </div>
+        <p className="mt-2 text-center font-mono text-[10px] tracking-[0.04em] text-mute">{site.phone}</p>
+      </aside>
 
-      {/* ——— 모바일: 하단 고정 바 ——— */}
-      <div className="fixed inset-x-0 bottom-0 z-40 lg:hidden">
-        <div className="border-t border-hairline bg-canvas/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md">
-          <div className="grid grid-cols-3">
-            <a
-              href={`tel:${site.phone}`}
-              data-phone-position="mobile-bottom"
-              className="flex min-h-[58px] flex-col items-center justify-center gap-1 text-body-strong active:bg-canvas-soft"
-            >
-              {PhoneIcon}
-              <span className="text-[11px] font-medium">전화상담</span>
-            </a>
-            <a
-              href={site.kakaoChatUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex min-h-[58px] flex-col items-center justify-center gap-1 border-x border-hairline text-body-strong active:bg-canvas-soft"
-            >
-              {KakaoIcon}
-              <span className="text-[11px] font-medium">카톡상담</span>
-            </a>
-            <Link
-              href="/consult"
-              className="flex min-h-[58px] flex-col items-center justify-center gap-1 bg-ink text-on-primary"
-            >
-              {FormIcon}
-              <span className="text-[11px] font-medium">상담신청</span>
-            </Link>
-          </div>
-        </div>
+      {/* 높이 113px + safe area — globals.css의 콘텐츠 여백과 함께 유지 */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-contact-accent/25 bg-canvas-deep/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_24px_rgba(0,0,0,0.16)] backdrop-blur-md lg:hidden">
+        <p className="flex h-8 items-center justify-center gap-1.5 border-b border-contact-accent/15 text-[11px] text-contact-accent">
+          <ClockIcon className="h-3.5 w-3.5" />
+          24시간 상담 접수 · 연중무휴
+        </p>
+        <nav aria-label="모바일 빠른 메뉴" className="mx-auto grid max-w-[640px] grid-cols-3 gap-2 px-3 pb-3 pt-2">
+          <a
+            href={`tel:${site.phone}`}
+            data-phone-position="mobile-bottom"
+            aria-label={`24시간 전화상담 ${site.phone}`}
+            className="flex min-h-[60px] min-w-0 flex-col items-center justify-center gap-1.5 rounded-md bg-contact-ivory px-1 py-1.5 text-on-primary transition-colors active:bg-ink"
+          >
+            <PhoneIcon />
+            <span className="text-[12px] font-semibold">전화상담</span>
+          </a>
+          <a
+            href={site.kakaoChatUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="카카오톡 상담"
+            className="flex min-h-[60px] min-w-0 flex-col items-center justify-center gap-1.5 rounded-md bg-contact-gold px-1 py-1.5 text-on-primary transition-colors active:bg-contact-ivory"
+          >
+            <KakaoIcon />
+            <span className="text-[12px] font-semibold">카카오톡</span>
+          </a>
+          <Link
+            href="/ai"
+            aria-current={aiActive ? "page" : undefined}
+            className={`flex min-h-[60px] min-w-0 flex-col items-center justify-center gap-1.5 rounded-md border px-1 py-1.5 text-contact-accent transition-colors active:bg-canvas-soft ${aiActive ? "border-contact-accent bg-canvas-soft" : "border-contact-accent/45"}`}
+          >
+            <AiIcon />
+            <span className="text-[12px] font-semibold">AI 진원</span>
+          </Link>
+        </nav>
       </div>
     </>
   );

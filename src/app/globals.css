@@ -15,6 +15,10 @@
   --mute: #aea69c;
   --on-primary: #2b2622;
   --amber: #d9b98a; /* 헤드라이트/경광 등 장면 연출 전용 웜 글로우 — UI 크롬에는 쓰지 않음 */
+  --contact-ivory: #f3ede3;
+  --contact-gold: #e5c993;
+  --contact-accent: #dcc096;
+  --mobile-contact-height: 113px;
   --stack-sans: var(--font-pretendard), "Pretendard Variable", Pretendard,
     -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
@@ -33,6 +37,9 @@
   --color-body: var(--body);
   --color-mute: var(--mute);
   --color-amber: var(--amber);
+  --color-contact-ivory: var(--contact-ivory);
+  --color-contact-gold: var(--contact-gold);
+  --color-contact-accent: var(--contact-accent);
   --color-on-primary: var(--on-primary);
   --font-sans: var(--stack-sans);
   --font-serif: var(--stack-serif);
@@ -115,10 +122,13 @@ select {
   top: 16px;
 }
 
-/* 모바일 하단 상담 바가 콘텐츠 끝을 가리지 않도록 */
+/* 하단 고정 메뉴 아래까지 본문을 스크롤하고, 포커스된 입력란을 볼 수 있도록 */
 @media (max-width: 1023.5px) {
-  footer {
-    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  html {
+    scroll-padding-bottom: calc(var(--mobile-contact-height) + env(safe-area-inset-bottom) + 16px);
+  }
+  body {
+    padding-bottom: calc(var(--mobile-contact-height) + env(safe-area-inset-bottom));
   }
 }
 

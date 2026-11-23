@@ -18,7 +18,7 @@ export const site = {
   naverMapUrl:
     "https://map.naver.com/p/search/서울특별시%20강남구%20영동대로%20607",
   kakaoMapUrl: "https://map.kakao.com/link/search/서울 강남구 영동대로 607",
-  kakaoChatUrl: "http://pf.kakao.com/_ZzpxnX/chat",
+  kakaoChatUrl: "https://pf.kakao.com/_ZzpxnX/chat",
   naverBlogUrl: "https://blog.naver.com/tele4n",
   instagramUrl: "https://www.instagram.com/jinwon_lawfirm/",
   youtubeUrl: "https://www.youtube.com/@법률사무소진원",
