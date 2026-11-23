@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...["/ai", ...questionTopics.map((topic) => "/ai/" + topic.slug)].map((path) => ({
       url: `${site.url}${path}`,
-      lastModified: questionVerifiedAt,
+      lastModified: path === "/ai" ? "2026-11-23" : questionVerifiedAt,
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),

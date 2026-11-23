@@ -1,0 +1,2 @@
+import {publicQuestions,questionUrl,questionVerifiedAt} from '@/data/questions';
+export function GET(){return Response.json(publicQuestions.map(q=>({id:'question-'+q.id,title:q.question,url:'https://www.jinwonlaw.co.kr'+questionUrl(q),topic:q.topic,text:[q.answer,q.detail,...q.checklist].join('\n'),keywords:q.keywords,verifiedAt:questionVerifiedAt,references:q.sources})),{headers:{'Cache-Control':'public,max-age=300','X-Robots-Tag':'noindex'}});}
